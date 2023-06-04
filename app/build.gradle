@@ -3,10 +3,9 @@ apply plugin: "org.sonarqube"
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "ajitsingh.com.expensemanager"
+        applicationId "chirag_pandkar.com.expensemanager"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         minSdkVersion 24
         targetSdkVersion 29
@@ -27,19 +26,21 @@ android {
             assets.srcDirs = ['src/main/assets', 'src/main/assets/tessdata/']
         }
     }
-
     packagingOptions {
-        exclude 'LICENSE.txt'
+        resources {
+            excludes += ['LICENSE.txt']
+        }
     }
+
+    namespace 'chirag_pandkar.com.expensemanager'
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'org.quanqi:android-holo-graph:0.1.0'
     implementation 'joda-time:joda-time:2.8.2'
     implementation 'com.google.mlkit:text-recognition:16.0.0-beta6'
-
     testImplementation 'junit:junit:4.12'
 
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ajitsingh.com.expensemanager" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -9,6 +8,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera.any" android:required="true" />
+
 
 
     <application
@@ -17,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/ExpenseManagerTheme" >
         <activity
-            android:name=".activity.MainActivity"
+            android:name="chirag_pandkar.com.expensemanager.activity.MainActivity"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name" >
@@ -27,10 +28,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AddCategoryActivity"/>
-        <activity android:name=".activity.DeleteCategoryActivity"/>
-
-        <receiver android:name=".receiver.FillExpenseNotificationReceiver">
+        <activity android:name="chirag_pandkar.com.expensemanager.activity.AddCategoryActivity"/>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="chirag_pandkar.com.expensemanager.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/res" />
+        </provider>
+        <receiver android:name="chirag_pandkar.com.expensemanager.receiver.FillExpenseNotificationReceiver">
+            <intent-filter>
+                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="chirag_pandkar.com.expensemanager.receiver.RemainderlExpenseNotificationReceiver">
             <intent-filter>
                 <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
                 <category android:name="android.intent.category.DEFAULT" />
